@@ -1,6 +1,10 @@
 // com.example.techinterviewdemo.presentation.ui.MovieScreen.kt
 package com.example.techinterviewdemo.presentation.ui
 
+import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
