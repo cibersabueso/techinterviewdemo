@@ -1,4 +1,4 @@
-// com.example.techinterviewdemo.data.db.MovieDatabase.kt
+// app/src/main/java/com/example/techinterviewdemo/data/db/MovieDatabase.kt
 package com.example.techinterviewdemo.data.db
 
 import androidx.room.Database

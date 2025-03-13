@@ -1,4 +1,4 @@
-// com.example.techinterviewdemo.di.AppContainer.kt
+// app/src/main/java/com/example/techinterviewdemo/di/AppContainer.kt
 package com.example.techinterviewdemo.di
 
 import android.content.Context
@@ -52,34 +52,4 @@ class AppContainer(private val context: Context) {
 
     // UseCase
     val getMoviesUseCase = GetMoviesUseCase(movieRepository)
-}
-
-@Composable
-fun MovieScreen() {
-    val context = LocalContext.current
-    val application = context.applicationContext as TechInterviewDemoApplication
-    val getMoviesUseCase = application.appContainer.getMoviesUseCase
-
-    val viewModel = viewModel<MoviesViewModel>(
-        factory = object : ViewModelProvider.Factory {
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return MoviesViewModel(getMoviesUseCase) as T
-            }
-        }
-    )
-// com.example.techinterviewdemo.TechInterviewDemoApplication.kt
-package com.example.techinterviewdemo
-
-import android.app.Application
-import com.example.techinterviewdemo.di.AppContainer
-
-class TechInterviewDemoApplication : Application() {
-
-    lateinit var appContainer: AppContainer
-        private set
-
-    override fun onCreate() {
-        super.onCreate()
-        appContainer = AppContainer(this)
-    }
 }

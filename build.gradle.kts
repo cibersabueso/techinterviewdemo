@@ -1,4 +1,3 @@
-// Archivo build.gradle.kts a nivel de proyecto
 plugins {
     id("com.android.application") version "8.1.2" apply false
     id("com.android.library") version "8.1.2" apply false

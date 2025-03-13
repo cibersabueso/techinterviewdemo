@@ -1,4 +1,4 @@
-// com.example.techinterviewdemo.TechInterviewDemoApplication.kt
+// app/src/main/java/com/example/techinterviewdemo/TechInterviewDemoApplication.kt
 package com.example.techinterviewdemo
 
 import android.app.Application

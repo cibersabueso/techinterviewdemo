@@ -1,10 +1,6 @@
 // com.example.techinterviewdemo.presentation.ui.MovieScreen.kt
 package com.example.techinterviewdemo.presentation.ui
 
-import androidx.compose.ui.platform.LocalContext
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -19,10 +15,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
+import com.example.techinterviewdemo.TechInterviewDemoApplication
 import com.example.techinterviewdemo.domain.model.Movie
 import com.example.techinterviewdemo.presentation.state.MoviesUiState
 import com.example.techinterviewdemo.presentation.viewmodel.MoviesViewModel
@@ -30,9 +30,21 @@ import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 
 @Composable
-fun MovieScreen(
-    viewModel: MoviesViewModel = viewModel()
-) {
+fun MovieScreen() {
+    // Obtener el contexto y el AppContainer
+    val context = LocalContext.current
+    val application = context.applicationContext as TechInterviewDemoApplication
+    val getMoviesUseCase = application.appContainer.getMoviesUseCase
+
+    // Crear el ViewModel con el UseCase inyectado
+    val viewModel = viewModel<MoviesViewModel>(
+        factory = object : ViewModelProvider.Factory {
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                return MoviesViewModel(getMoviesUseCase) as T
+            }
+        }
+    )
+
     val uiState by viewModel.uiState.collectAsState()
     val isRefreshing by viewModel.isRefreshing.collectAsState()
 
